@@ -10,7 +10,7 @@ import streamlit as st
 from collections import Counter
 # import plotly.express as px
 # import plotly.graph_objects as go
-from bokeh.palettes import Paired12, Category20c_20
+# from bokeh.palettes import Paired12, Category20c_20
 
 from itertools import chain
 from sklearn.preprocessing import OneHotEncoder, QuantileTransformer
