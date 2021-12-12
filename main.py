@@ -8,8 +8,8 @@ import pandas as pd
 import streamlit as st
 
 from collections import Counter
-import plotly.express as px
-import plotly.graph_objects as go
+# import plotly.express as px
+# import plotly.graph_objects as go
 from bokeh.palettes import Paired12, Category20c_20
 
 from itertools import chain
