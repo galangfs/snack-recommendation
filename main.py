@@ -184,7 +184,7 @@ data['item_id'] = data['food_id'].apply(snack2item)
 
 
 # Untuk menggunakan kembali model di lain waktu untuk membuat prediksi, kami memuat model yang disimpan
-model = load_model("static\model.h5")
+model = load_model("static/model.h5")
 
 # Membuat modul explore 
 indexed_snacks = snack_df.set_index('food_id')
