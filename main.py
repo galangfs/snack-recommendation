@@ -220,11 +220,11 @@ def recommend(user_id):
     # membuat berbagai makanan ringan yang tidak dibeli dengan id item masing-masing
     test_items = np.array([snack2item(a) for a in test_snacks])
     
-    #untuk makanan ringan yang tidak dibeli oleh user 
+    # untuk makanan ringan yang tidak dibeli oleh user 
     # semua kolom(food_id,food_name,type of food,food_genre,hot encoded feature column)
     sub_snack = indexed_snacks.loc[test_snacks]
     
-    #stacking the food_genre features columns
+    # menyusun kolom fitur food_genre
     test_features = np.stack(sub_snack['features'].to_numpy())
     
     test = [test_user, test_items, test_features]
@@ -244,21 +244,31 @@ def recommend(user_id):
 # Sistem Rekomendasi Pemfilteran Kolaboratif Neural
 
 '''
+# st.subheader("Github: https://github.com/galangfs/snack-recommendation")
+
+st.subheader("# akses daring: https://share.streamlit.io/galangfs/snack-recommendation/main/main.py")
 
 user_id = st.number_input("Hai, Masukkan user_id 0-10093 untuk mencoba eksplor",value=8177, min_value=0, max_value=10093)
-explore_df = recommend(user_id)
-recommend_df = explore(user_id)
+explore_df = explore(user_id)
+recommend_df = recommend(user_id)
 
-usr_headline = "## Aktifitas dari Pembeli - " + str(user_id) + "\n" + " Berbagai Tren dan statistik dilakukan oleh pembeli hingga saat ini."
+usr_headline = "## Aktifitas dari ID Pembeli - " + str(user_id) + "\n" + " Berbagai Tren dan statistik dilakukan oleh pembeli hingga saat ini."
 st.markdown(usr_headline)
 
 st.subheader("Dataframe Aktifitas Pembeli - ")
 st.dataframe(explore_df)
 
+st.subheader("Rating Trend of User")
+explore_rating_df = pd.DataFrame(explore_df.groupby('rating')['rating'].count())
+fig_explore_rating_df = go.Figure(data=go.Scatter(x=explore_rating_df.index, y=explore_rating_df["rating"], marker_color="#cc4c02"))
+fig_explore_rating_df.update_layout(title="Rating vs Count", xaxis_title='Rating', yaxis_title='Count (Number of Products)', plot_bgcolor="#999999",width=800, height=600)
+st.plotly_chart(fig_explore_rating_df)
+
 
 st.subheader("Tipe Makanan yang dibeli oleh Pembeli -")
 explore_types_of_food = pd.DataFrame(explore_df.groupby('type_of_food')['type_of_food'].count())
 explore_color_type = list(Paired12[:len(explore_types_of_food)])
+
 fig_explore_types_of_food = go.Figure(data=[go.Bar(x=explore_types_of_food.index, y=explore_types_of_food["type_of_food"], marker_color=explore_color_type)])
 fig_explore_types_of_food.update_layout(title="Tipe Makan Ringan dan Jumlah Produk", xaxis_title='Tipe Makanan Ringan', yaxis_title='Jumlah Produk', xaxis_tickangle=-45, plot_bgcolor="#707070",width=800, height=600)    
 st.plotly_chart(fig_explore_types_of_food)
