@@ -1,5 +1,6 @@
 # snack-recommendation
 Proyek ini dibuat untuk memenuhi UAS Data Mining 2021
+
 Demo: https://share.streamlit.io/galangfs/snack-recommendation/main/main.py
 
 1.	Perekenalan
