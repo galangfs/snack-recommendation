@@ -258,10 +258,10 @@ st.markdown(usr_headline)
 st.subheader("Dataframe Aktifitas Pembeli - ")
 st.dataframe(explore_df)
 
-st.subheader("Rating Trend of User")
+st.subheader("Tren Rating Pembeli")
 explore_rating_df = pd.DataFrame(explore_df.groupby('rating')['rating'].count())
 fig_explore_rating_df = go.Figure(data=go.Scatter(x=explore_rating_df.index, y=explore_rating_df["rating"], marker_color="#cc4c02"))
-fig_explore_rating_df.update_layout(title="Rating vs Count", xaxis_title='Rating', yaxis_title='Count (Number of Products)', plot_bgcolor="#999999",width=800, height=600)
+fig_explore_rating_df.update_layout(title="Rating dan Jumlah Produk", xaxis_title='Rating', yaxis_title='Jumlah Produk', plot_bgcolor="#999999",width=800, height=600)
 st.plotly_chart(fig_explore_rating_df)
 
 
